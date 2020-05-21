@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+ul{
+  list-style: none;
+  display: flex;
+  justify-content: end;
+}
+li{
+  padding: 5px;
+  cursor: pointer;
+}
+form{
+  width: 30%;
+  margin: 0 auto;
+}
