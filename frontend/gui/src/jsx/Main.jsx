@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {useHistory } from 'react-router-dom';
 import Nav from './components/Nav';
+import '../scss/Main.css'
 class Main extends Component{
     
     constructor(props) {
@@ -36,14 +37,15 @@ class Main extends Component{
     // history.push("/home");
     render(){
     return(
-        <div>
-        <Nav
+        <div className="main_wrapper">
+            <div className="header">
+            <div className="header_user_name">{`${this.state.first_name}`}</div>
+            <Nav
             logged_in={this.state.logged_in}
             // display_page={this.display_page}
             handle_logout={this.handle_logout}
-        />
-
-        <h1>{`Hello, ${this.state.first_name}`}</h1>
+            />
+            </div>
         </div>
     );
 }

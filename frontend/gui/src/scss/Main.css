@@ -1,0 +1,8 @@
+.main_wrapper{
+    width: 80%;
+    margin: 0 auto;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
