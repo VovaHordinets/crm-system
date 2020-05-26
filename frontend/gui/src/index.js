@@ -1,9 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import "./scss/index.css";
+import $ from "jquery";
+import render from "./jsx/render";
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+$(document).ready(() => {
+  console.log("ready");
+  render($("#root")[0]);
+});

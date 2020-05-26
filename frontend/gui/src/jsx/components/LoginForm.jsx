@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class LoginForm extends React.Component {
   state = {
     username: '',
+    regexp : /^[0-9\b]+$/,
     password: ''
   };
 
@@ -16,21 +17,35 @@ class LoginForm extends React.Component {
       return newState;
     });
   };
+  onHandleTelephoneChange = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+    // if value is not blank, then test the regex
+    if (value === '' || this.state.regexp.test(value)) {
+      this.setState(prevstate => {
+        const newState = { ...prevstate };
+        newState[name] = value;
+        return newState;
+      });
+    }
+};
 
   render() {
     return (
       <form onSubmit={e => this.props.handle_login(e, this.state)}>
-        <h4>Log In</h4>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="phone">Phone</label>
         <input
           type="text"
           name="username"
+          autoComplete="off" 
+          required = 'required'
           value={this.state.username}
-          onChange={this.handle_change}
+          onChange={this.onHandleTelephoneChange}
         />
         <label htmlFor="password">Password</label>
         <input
           type="password"
+          required = 'required'
           name="password"
           value={this.state.password}
           onChange={this.handle_change}

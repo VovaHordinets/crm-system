@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 function Nav(props) {
   const logged_out_nav = (
-    <ul>
-      <li onClick={() => props.display_form('login')}>login</li>
-      <li onClick={() => props.display_form('signup')}>signup</li>
+    <ul className="buttons">
+      <li onClick={() => props.display_page('login')}>login</li>
+      <li onClick={() => props.display_page('signup')}>signup</li>
     </ul>
   );
 
@@ -21,6 +21,6 @@ export default Nav;
 
 Nav.propTypes = {
   logged_in: PropTypes.bool.isRequired,
-  display_form: PropTypes.func.isRequired,
+  display_page: PropTypes.func.isRequired,
   handle_logout: PropTypes.func.isRequired
 };

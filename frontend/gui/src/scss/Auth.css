@@ -1,0 +1,28 @@
+.Auth {
+  text-align: center;
+}
+.auth_wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 3px solid green; 
+  height: 100vh;
+  width: 30%;
+  margin: 0 auto;
+}
+.auth_wrapper h3{
+  text-align: center;
+}
+.auth_wrapper .buttons{
+  justify-content: center;
+}
+
+input {
+  margin: 0px auto;
+  display: block;
+}
+label{
+  display: block;
+  margin-bottom: 5px;
+}
