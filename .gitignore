@@ -1,4 +1,9 @@
-env
+Web2
 **/*.pyc
 node_modules/
 build
+bin
+lib
+.*
+pyvenv.cfg
+
