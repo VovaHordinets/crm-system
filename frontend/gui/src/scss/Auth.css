@@ -18,11 +18,18 @@
   justify-content: center;
 }
 
-input {
+.Auth input {
   margin: 0px auto;
   display: block;
 }
-label{
+.Auth label{
   display: block;
   margin-bottom: 5px;
+}
+.auth_wrapper ul{
+  display: flex;
+}
+.auth_wrapper li{
+  padding: 5px;
+  cursor: pointer;
 }

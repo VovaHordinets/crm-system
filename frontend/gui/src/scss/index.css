@@ -16,13 +16,14 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, li{
 }
 a{
   text-decoration: none;
-  color: #fff;
 }
 ul{
   list-style: none;
-  display: flex;
 }
-li{
-  padding: 5px;
-  cursor: pointer;
+button{
+  background: inherit;
+  border: none;
+  line-height: 0;
+  outline: none;
+  padding: 0;
 }

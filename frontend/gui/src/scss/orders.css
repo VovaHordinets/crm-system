@@ -1,0 +1,20 @@
+.order-form {
+    display: flex;
+}
+.order-form label{
+    font-size: 10px;
+}
+.order-form input{
+    font-size: 11px;
+}
+button:hover{
+    cursor: pointer;
+}
+.order-item{
+    margin: 20px 0;
+    background-color: aqua;
+}
+.order__content{
+    display: flex;
+    justify-content: space-evenly;
+}
