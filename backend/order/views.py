@@ -10,16 +10,41 @@ from .models import Order
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 # Create your views here.
+class IsAuthenticatedOwner(permissions.BasePermission):
+    def has_permission(self, request, view):
+        # work when your access /item/
+        if request.user and request.user.is_authenticated:
+                return True   
+        else:
+            return False
 
+    def has_object_permission(self, request, view, obj):
+        # work when your access /item/item_id/
+        # Instance must have an attribute named `user`.
+        return obj.user == request.user
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    permission_classes = (IsAuthenticatedOwner,)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)
+
+    def destroy(self, request, *args, **kwargs):
+        order = self.get_object()
+        order.is_active = False
+        order.save()
+        return Response(data='delete success')
+    def perform_destroy(self, instance): 
+        instance.delete();    
 
     def create(self, request, *args, **kwags):
         order_data = request.data
         new_order = Order.objects.create(
-            user = User.objects.get(id=order_data["user"]),
+            user = request.user,
             name = order_data["name"],
             description = order_data["description"],
             customer = order_data["customer"],
@@ -27,3 +52,6 @@ class OrderViewSet(viewsets.ModelViewSet):
         new_order.save()
         serializer = OrderSerializer(new_order)
         return Response(serializer.data)
+    
+
+
