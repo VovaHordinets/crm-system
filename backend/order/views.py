@@ -33,14 +33,6 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
 
-    def destroy(self, request, *args, **kwargs):
-        order = self.get_object()
-        order.is_active = False
-        order.save()
-        return Response(data='delete success')
-    def perform_destroy(self, instance): 
-        instance.delete();    
-
     def create(self, request, *args, **kwags):
         order_data = request.data
         new_order = Order.objects.create(
@@ -51,7 +43,6 @@ class OrderViewSet(viewsets.ModelViewSet):
             phone = order_data["phone"] )
         new_order.save()
         serializer = OrderSerializer(new_order)
-        return Response(serializer.data)
-    
+        return Response(serializer.data)  
 
 
