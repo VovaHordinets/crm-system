@@ -29,11 +29,13 @@ class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOwner,)
 
     def perform_create(self, serializer):
+        serializer = self.get_serializer(data=self.request.data)
+        serializer.is_valid(raise_exception=True)
         serializer.save(user=self.request.user)
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
 
-    def create(self, request, *args, **kwags):
+    """ def create(self, request, *args, **kwags):
         order_data = request.data
         new_order = Order.objects.create(
             user = request.user,
@@ -42,7 +44,8 @@ class OrderViewSet(viewsets.ModelViewSet):
             customer = order_data["customer"],
             phone = order_data["phone"] )
         new_order.save()
+
         serializer = OrderSerializer(new_order)
         return Response(serializer.data)  
-
+ """
 
