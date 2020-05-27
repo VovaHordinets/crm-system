@@ -9,6 +9,13 @@ import '../scss/Auth.css'
 //       history.push("/home");
 // }
 // const history = useHistory();
+const validateForm = (errors) => {
+  let valid = true;
+  Object.values(errors).forEach(
+    (val) => val.length > 0 && (valid = false)
+  );
+  return valid;
+}
 class Auth extends Component {
   
   constructor(props) {
@@ -26,7 +33,7 @@ class Auth extends Component {
 
   handle_login = (e, data) => {
     e.preventDefault();
-
+    if(validateForm(data.errors)) {
     fetch('http://localhost:8000/token-auth/', {
       method: 'POST',
       headers: {
@@ -46,12 +53,16 @@ class Auth extends Component {
         });
         window.location = this.state.current_page;  
       });
-
+    }
+    else{
+      console.error('Invalid Form');
+    }
   };
 
   handle_signup = (e, data) => {
     e.preventDefault();
     console.log(data);
+    if(validateForm(data.errors)) {
     fetch('http://localhost:8000/userauth/users/', {
       method: 'POST',
       headers: {
@@ -71,6 +82,10 @@ class Auth extends Component {
         });
         window.location = this.state.current_page;
       });
+    }
+    else{
+      console.error('Invalid Form');
+    }
   };
 
   display_page = page => {

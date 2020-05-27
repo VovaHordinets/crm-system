@@ -2,16 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+const validateForm = (errors) => {
+    let valid = true;
+    Object.values(errors).forEach(
+      (val) => val.length > 0 && (valid = false)
+    );
+    return valid;
+  }
+  const validPhoneRegex = RegExp(/^[0-9\b]{10}$/);
+
 class OrderForm extends React.Component {
     state = {
         name: '',
         description: '',
         customer: '',
-        regexp : /^[0-9\b]+$/,
-        phone: ''
+        phone: '',
+        errors: {
+            name: '',
+            customer: '',
+            phone: ''
+          }
       };
+      
     handle_createOrder = (event, requestType) => {
         event.preventDefault();
+        if(validateForm(this.state.errors)) {
         const name = event.target.elements.name.value;
         const description = event.target.elements.description.value;
         const customer = event.target.elements.customer.value;
@@ -39,30 +54,43 @@ class OrderForm extends React.Component {
                 .then(res => console.log(res))
                 .catch(err =>console.log(err));
         }
+    }
+    else{
+        console.error('Invalid Form')
+      }
 
       };
       handle_change = e => {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState(prevstate => {
-          const newState = { ...prevstate };
-          newState[name] = value;
-          return newState;
-        });
+        event.preventDefault();
+    const { name, value } = event.target;
+    let errors = this.state.errors;
+
+    switch (name) {
+      case 'name': 
+        errors.name = 
+          value.length < 5
+            ? 'Name must be 5 characters long at least!'
+            : '';
+        break;
+      case 'customer': 
+        errors.customer = 
+            value.length < 5
+            ? 'Customer name must be 5 characters long at least'
+            : '';
+        break;
+      case 'phone':
+        errors.phone = validPhoneRegex.test(value)
+            ? ''
+            : 'Incorrect phone number!';
+            break;
+      default:
+        break;
+    }
+
+    this.setState({errors, [name]: value});
       };
-      onHandleTelephoneChange = e => {
-        const name = e.target.name;
-        const value = e.target.value;
-        // if value is not blank, then test the regex
-        if (value === '' || this.state.regexp.test(value)) {
-          this.setState(prevstate => {
-            const newState = { ...prevstate };
-            newState[name] = value;
-            return newState;
-          });
-        }
-    };
     render() {
+        const {errors} = this.state;
         return (
           <form className = "order-form" onSubmit={(event) => this.handle_createOrder(event,'post')}>
             <label htmlFor="name">Order's name</label>
@@ -73,7 +101,10 @@ class OrderForm extends React.Component {
               autoComplete="off" 
               required = 'required'
               onChange={this.handle_change}
+              
             />
+            {errors.name.length > 0 && 
+                <span className='error'>{errors.name}</span>}
             <label htmlFor="description">Description</label>
             <input
               placeholder="Enter some description"
@@ -85,19 +116,26 @@ class OrderForm extends React.Component {
             <label htmlFor="customer">Customer</label>
             <input
               type="text"
+              maxLength = "20" 
               value={this.state.customer}
               name="customer"
               onChange={this.handle_change}
             />
+            {errors.customer.length > 0 && 
+                <span className='error'>{errors.customer}</span>}
             <label htmlFor="phone">Customer's Phone</label>
+            <div>+38</div>
             <input
             type="tel"
             name="phone"
             value={this.state.phone}
-            autoComplete="off" 
+            autoComplete="off"
+            maxLength = "10" 
             required = 'required'
-            onChange={this.onHandleTelephoneChange}
+            onChange={this.handle_change}
             />
+            {errors.phone.length > 0 && 
+                <span className='error'>{errors.phone}</span>}
             <input type="submit" />
           </form>
         );
