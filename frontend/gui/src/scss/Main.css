@@ -1,5 +1,12 @@
+@font-face{
+    font-family: 'Tenali';
+    src: url('../fonts/TenaliRamakrishna-Regular.ttf');
+}
+#root {
+  font-family: 'Tenali';  
+}
 .main_wrapper{
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 }
 .header{
@@ -8,4 +15,88 @@
 }
 .header li {
     cursor: pointer;
+    width: 50px;
 }
+
+.order-form {
+    width: 40%;
+}
+
+.order__content div{
+    width: 20%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.order__content div .output{ 
+    font-size: 16px;
+    width: 100%;
+    height: 35px;
+    line-height: 25px;
+    font-family: 'Tenali';
+    background-color: white;
+    border: 1px solid #2f3640;
+}
+
+.header_user_name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.btn h1 {
+    line-height: 34px;
+    text-align: center;
+}
+
+.table {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    margin-top: 10%;
+}
+
+.order-form label {
+    font-size: 18px !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.wrapper_content {
+    width: 100%;
+    display: flex;
+}
+
+.edit {
+    width: 100%;
+}
+
+.order-form input {
+    font-family: 'Tenali';
+    display: block;
+    width: 50%;
+    height: 30px;
+    font-size: 15px !important;
+    color: #2f3640;
+}
+
+ .order-form .submit {
+    width: 35% !important;
+    height: 45px !important;
+    background-color: white;
+    color: black;
+    border: 3px solid #2f3640;
+    margin: 20px auto!important;
+    font-size: 25px !important;
+} 
+
+.order-form .submit:hover {
+    color: white;
+    background-color: #2f3640;
+    cursor: pointer;
+} 
