@@ -15,31 +15,12 @@ export default function render(container) {
   }
   export function Site(){
     return(
-        // hea mast be Main and Auth
       <BrowserRouter>
-      {/* <Redirect exact from="/" to="/auth" /> */}
-                  <Switch>
-                      
-                    
-                    {/* <Route exact path="/auth" render={() => (!isLoged() ? (<Redirect to="/home"/>) : (<Redirect to="/auth"/>))}/> */}
-                            {/* <Route exact={true} path='/'>
-                            {() => isLoged ? (<Redirect to="/"/>) : (<Redirect to="/"/>)}
-                                    <Redirect to="/auth"/>
-                            </Route> */}
-                    {/* <Route exact={true} path="/home" component={Main} /> */}
-                    <Route exact={true} path="/auth" component={Auth} />
-                    {isLoged() ? (
-                              <Route exact path="/home" component={Main} />
-                                        ) : (
-                              <Redirect to="/auth" />
-                    )}
-                    {/* {!isLoged() ? (
-                              <Route exact path="/auth" component={Auth} />
-                                        ) : (
-                              <Redirect to="/home" />
-                    )} */}
-                    <Route exact path="/" render={() => (!isLoged() ? (<Redirect to="/auth"/>) : (<Redirect to="/home"/>))}/>
-                  </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route exact path="/" render={() => (!isLoged() ? <Redirect to="/auth" /> : <Redirect form="/auth"  to="/home" />)} /> />
+        {isLoged() ? <Redirect from="/auth" to="/home" /> : <Route exact={true} path="/auth" component={Auth} />}
+        {isLoged() ? <Route exact path="/home" component={Main} /> : <Redirect from="/home" to="/auth" />}
+      </Switch>
+    </BrowserRouter>
     );
   }

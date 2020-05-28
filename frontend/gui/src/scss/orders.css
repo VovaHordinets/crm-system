@@ -1,6 +1,23 @@
 .order-form {
     display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+
+} 
+
+.actionName {
+    display: flex; 
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 100%;
 }
+
+.image-items {
+    width: 95%;
+}
+
 .order-form label{
     font-size: 10px;
 }
@@ -12,9 +29,10 @@ button:hover{
 }
 .order-item{
     margin: 20px 0;
-    background-color: aqua;
+    background-color: #ecf0f1;
+    border: 3px solid #2c3e50;
 }
 .order__content{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }

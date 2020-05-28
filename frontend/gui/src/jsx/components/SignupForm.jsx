@@ -56,55 +56,57 @@ this.setState({errors, [name]: value});
   render() {
     const {errors} = this.state;
     return (
-      <form onSubmit={e => this.props.handle_signup(e, this.state)}>
+      <form onSubmit={(e) => this.props.handle_signup(e, this.state)}>
         <label htmlFor="username">Phone</label>
-        <div className="phone-number">+38
-        <input
-          type="tel"
-          required = 'required'
-          autoComplete="off"
-          maxLength = "10" 
-          name="username"
-          value={this.state.username}
-          onChange={this.handle_change}
-        />
-        {errors.username.length > 0 && 
-        <span className='error'>{errors.username}</span>}
-
+        <div className="inpSec">
+          <input
+            placeholder="+38"
+            type="tel"
+            required="required"
+            autoComplete="off"
+            maxLength="10"
+            name="username"
+            value={this.state.username}
+            onChange={this.handle_change}
+          />
+          {errors.username.length > 0 && <span className="error">{errors.username}</span>}
         </div>
         <label htmlFor="first_name">Name</label>
+        <div className="inpSec">
         <input
           type="text"
           autoComplete="off"
-          required = 'required' 
+          required="required"
           name="first_name"
           value={this.state.first_name}
           onChange={this.handle_change}
         />
-        {errors.first_name.length > 0 && 
-        <span className='error'>{errors.first_name}</span>}
+        {errors.first_name.length > 0 && <span className="error">{errors.first_name}</span>}
+        </div>
         <label htmlFor="last_name">Surname</label>
-        <input
-          type="text"
-          required = 'required'
-          autoComplete="off" 
-          name="last_name"
-          value={this.state.last_name}
-          onChange={this.handle_change}
-        />
-        {errors.last_name.length > 0 && 
-        <span className='error'>{errors.last_name}</span>}
+        <div className="inpSec">
+          <input
+            type="text"
+            required="required"
+            autoComplete="off"
+            name="last_name"
+            value={this.state.last_name}
+            onChange={this.handle_change}
+          />
+          {errors.last_name.length > 0 && <span className="error">{errors.last_name}</span>}
+        </div>
         <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          required = 'required'
-          name="password"
-          value={this.state.password}
-          onChange={this.handle_change}
-        />
-        {errors.password.length > 0 && 
-        <span className='error'>{errors.password}</span>}
-        <input type="submit" />
+        <div className="inpSec">
+          <input
+            type="password"
+            required="required"
+            name="password"
+            value={this.state.password}
+            onChange={this.handle_change}
+          />
+          {errors.password.length > 0 && <span className="error">{errors.password}</span>}
+        </div>
+        <input type="submit" className="submit" value="Sign Up" />
       </form>
     );
   }

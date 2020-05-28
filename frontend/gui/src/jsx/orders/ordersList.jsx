@@ -17,20 +17,14 @@ class OrderList extends React.Component {
             })
             
     }
-    handleDelete = (event) =>{
-     
-        const orderId = this.props.match.params.orderId;
-        axios.delete(`http://localhost:8000/orders/${orderId}`);
-    }
-    
     render(){
         return(
-        <ul className="image-items">
-            {this.state.orders.map(item =>{
-                console.log(item);
-                return <OrderItem key={item.id}  item={item}/>
+            <ul className="image-items">
+            {this.state.orders.slice(0).reverse().map((item) => {
+              console.log(item);
+              return <OrderItem key={item.id} item={item} />;
             })}
-        </ul>
+          </ul>
         );
     }
 }

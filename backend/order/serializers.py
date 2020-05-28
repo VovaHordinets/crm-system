@@ -1,10 +1,21 @@
 from rest_framework import serializers
 from .models import Order
+import re
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
+
+
+
 
 
 class OrderSerializer(serializers.ModelSerializer):
-
+    phone = serializers.CharField(max_length=15)
     class Meta:
         model = Order
-        fields = ['id', 'name', 'description', 'customer', 'phone']
+        fields = ['id', 'name', 'description', 'customer','phone']
         depth = 1 
+    def validate_phone(self,value):
+        match = re.search("(\d{10})", value)
+        if match != None and match.group() == value : 
+            return value    
+        raise serializers.ValidationError(_("Sorry,phone isn't correct"), code='invalid')

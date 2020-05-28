@@ -39,34 +39,40 @@ class LoginForm extends React.Component {
   render() {
     const {errors} = this.state;
     return (
-      <form onSubmit={e => this.props.handle_login(e, this.state)}>
-        <label htmlFor="username">Phone</label>
-        <div className="phone-number">+38
-        <input
-          type="tel"
-          name="username"
-          maxLength = "10"
-          autoComplete="off" 
-          required = 'required'
-          value={this.state.username}
-          onChange={this.handle_change}
-          noValidate
-        />
-        {errors.username.length > 0 && 
-        <span className='error'>{errors.username}</span>}
+      <form onSubmit={(e) => this.props.handle_login(e, this.state)}>
+        <div className="inpSec">
+          <div className="labelInp">
+            <label htmlFor="username">Phone</label>
+            <input
+              placeholder="+38"
+              type="tel"
+              name="username"
+              maxLength="10"
+              autoComplete="off"
+              required="required"
+              value={this.state.username}
+              onChange={this.handle_change}
+              noValidate
+            />
+          {errors.username.length > 0 && <span className="error">{errors.username}</span>}
+          </div>
         </div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          required = 'required'
-          name="password"
-          value={this.state.password}
-          onChange={this.handle_change}
-          noValidate
-        />
-        {errors.password.length > 0 && 
-        <span className='error'>{errors.password}</span>}
-        <input type="submit" />
+
+        <div className="inpSec">
+          <div className="labelInp">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              required="required"
+              name="password"
+              value={this.state.password}
+              onChange={this.handle_change}
+              noValidate
+            />
+          {errors.password.length > 0 && <span className="error">{errors.password}</span>}
+          </div>
+        </div>
+        <input type="submit" className="submit" value="Sign In" />
       </form>
     );
   }

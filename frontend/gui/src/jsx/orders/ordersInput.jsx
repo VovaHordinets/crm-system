@@ -24,7 +24,7 @@ class OrderForm extends React.Component {
           }
       };
       
-    handle_createOrder = (event, requestType) => {
+    handle_createOrder = (event, requestType,id) => {
         event.preventDefault();
         if(validateForm(this.state.errors)) {
         const name = event.target.elements.name.value;
@@ -41,11 +41,12 @@ class OrderForm extends React.Component {
                     description: description,
                     customer: customer,
                     phone: phone
-                })
+                },window.location.reload()
+                )
                 .then(res => console.log(res))
                 .catch(err =>console.log(err));
             case 'put':
-                axios.put('http://localhost:8000/orders',{
+                return axios.put(`http://localhost:8000/orders/${id}/`,{
                     name: name,
                     description: description,
                     customer: customer,
@@ -92,58 +93,57 @@ class OrderForm extends React.Component {
     render() {
         const {errors} = this.state;
         return (
-          <form className = "order-form" onSubmit={(event) => this.handle_createOrder(event,'post')}>
-            <label htmlFor="name">Order's name</label>
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              autoComplete="off" 
-              required = 'required'
-              onChange={this.handle_change}
-              
-            />
-            {errors.name.length > 0 && 
-                <span className='error'>{errors.name}</span>}
-            <label htmlFor="description">Description</label>
-            <input
-              placeholder="Enter some description"
-              type="text"
-              value={this.state.description}
-              name="description"
-              onChange={this.handle_change}
-            />
-            <label htmlFor="customer">Customer</label>
-            <input
-              type="text"
-              maxLength = "20" 
-              value={this.state.customer}
-              name="customer"
-              onChange={this.handle_change}
-            />
-            {errors.customer.length > 0 && 
-                <span className='error'>{errors.customer}</span>}
-            <label htmlFor="phone">Customer's Phone</label>
-            <div>+38</div>
-            <input
-            type="tel"
-            name="phone"
-            value={this.state.phone}
-            autoComplete="off"
-            maxLength = "10" 
-            required = 'required'
-            onChange={this.handle_change}
-            />
-            {errors.phone.length > 0 && 
-                <span className='error'>{errors.phone}</span>}
-            <input type="submit" />
-          </form>
+<form className="order-form" onSubmit={(event) => this.handle_createOrder(event, "post", null)}>
+        <div className="actionName">
+          <div className="spacer"> </div>
+          <h1 className="title">Add New Order</h1>
+          <div className="spacer"> </div>
+        </div>
+        <label className="labelInp" htmlFor="name">
+          Order's name
+        </label>
+        <input
+          type="text"
+          name="name"
+          value={this.state.name}
+          autoComplete="off"
+          required="required"
+          onChange={this.handle_change}
+        />
+        {errors.name.length > 0 && <span className="error">{errors.name}</span>}
+        <label className="labelInp" htmlFor="description">
+          Description
+        </label>
+        <input
+          placeholder="Enter some description"
+          type="text"
+          value={this.state.description}
+          name="description"
+          onChange={this.handle_change}
+        />
+        <label className="labelInp" htmlFor="customer">
+          Customer
+        </label>
+        <input type="text" maxLength="20" value={this.state.customer} name="customer" onChange={this.handle_change} />
+        {errors.customer.length > 0 && <span className="error">{errors.customer}</span>}
+        <label className="labelInp" htmlFor="phone">
+          Customer's Phone
+        </label>
+        <input
+          type="tel"
+          name="phone"
+          value={this.state.phone}
+          placeholder="+38"
+          autoComplete="off"
+          maxLength="10"
+          required="required"
+          onChange={this.handle_change}
+        />
+        {errors.phone.length > 0 && <span className="error">{errors.phone}</span>}
+        <input type="submit" className="submit" value="Add Order" />
+      </form>
         );
       }
     }
     
     export default OrderForm;
-    
-    OrderForm.propTypes = {
-        handle_createOrder: PropTypes.func.isRequired
-    };

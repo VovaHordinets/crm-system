@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
-import Nav from './components/Nav';
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
-import { Route, Redirect } from 'react-router-dom'
-import '../scss/Auth.css'
-// function GotoMain(){
-//   const history = useHistory();
-//       history.push("/home");
-// }
-// const history = useHistory();
+import React, { Component } from "react";
+import Nav from "./components/Nav";
+import LoginForm from "./components/LoginForm";
+import SignupForm from "./components/SignupForm";
+import { Route, Redirect } from "react-router-dom";
+
+import "../scss/Auth.css";
 const validateForm = (errors) => {
   let valid = true;
   Object.values(errors).forEach(
@@ -28,8 +24,6 @@ class Auth extends Component {
       current_page: '/auth',
     };
   }
-  // localStorage.getItem('token') ? true :
-
 
   handle_login = (e, data) => {
     e.preventDefault();
@@ -43,6 +37,7 @@ class Auth extends Component {
     })
       .then(res => res.json())
       .then(json => {
+        if(json.user !== undefined){
         localStorage.setItem('token', json.token);
         this.setState({
           logged_in: true,
@@ -50,9 +45,12 @@ class Auth extends Component {
           username: json.user.username,
           first_name: json.user.first_name,
           current_page: '/home'
-        });
-        window.location = this.state.current_page;  
-      });
+        })    
+      window.location = this.state.current_page;
+      }else{
+        alert('Wrong password or phone number');
+      }
+    });
     }
     else{
       console.error('Invalid Form');
@@ -72,6 +70,8 @@ class Auth extends Component {
     })
       .then(res => res.json())
       .then(json => {
+        console.log(json.username[0]);
+        if(json.username[0] !== "A user with that username already exists."){
         localStorage.setItem('token', json.token);
         this.setState({
           logged_in: true,
@@ -81,7 +81,10 @@ class Auth extends Component {
           current_page: '/home'
         });
         window.location = this.state.current_page;
-      });
+      }else{
+        alert('This phone number is already used!');
+      }
+    });
     }
     else{
       console.error('Invalid Form');
@@ -107,41 +110,16 @@ class Auth extends Component {
       default:
         form = null;
     }
-    // if(!this.state.logged_in){
       return (
         <div className="auth_wrapper">
-          <h3>
-              Please Log In 
-          </h3>
-          <Nav
-            logged_in={this.state.logged_in}
-            display_page={this.display_page}
-            // handle_logout={this.handle_logout}
-          />
-          <div className="Auth">
-          {form}
-
-          </div>
-          </div>
+        <div className="loginContainer">
+          <h1 className="title">GodDamnCRM</h1>
+          <h3>Log In or Sign Up</h3>
+          <Nav logged_in={this.state.logged_in} display_page={this.display_page} />
+          <div className="Auth">{form}</div>
+        </div>
+      </div>
       );
-    // }
-    // else{
-          // const history = useHistory();
-    // history.push("/home");
-      // return(
-      //   <div>
-      //     <h1> {`Hello, ${this.state.first_name}`}</h1>
-      //     <Nav
-      //       logged_in={this.state.logged_in}
-      //       display_page={this.display_page}
-      //       handle_logout={this.handle_logout}
-      //     />
-      //       <Main />
-      //   </div>
-
-      // );
-    // }
-    
   }
 }
 
