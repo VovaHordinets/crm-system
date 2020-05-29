@@ -1,49 +1,60 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+
 
 const validPhoneRegex = RegExp(/^[0-9\b]{10}$/);
 const strongPassword = RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
 class SignupForm extends React.Component {
   state = {
-    username: "",
-    first_name: "",
-    last_name: "",
-    password: "",
+    username: '',
+    first_name: '',
+    last_name: '',
+    password: '',
     errors: {
-      username: "",
-      first_name: "",
-      last_name: "",
-      password: "",
-    },
-  };
-  handle_change = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    let errors = this.state.errors;
-
-    switch (name) {
-      case "first_name":
-        errors.first_name = value.length < 5 ? "Name must be 5 characters long at least!" : "";
-        break;
-      case "last_name":
-        errors.last_name = value.length < 5 ? "Surname must be 5 characters long at least" : "";
-        break;
-      case "username":
-        errors.username = validPhoneRegex.test(value) ? "" : "Incorrect phone number!";
-        break;
-      case "password":
-        errors.password = strongPassword.test(value) ? "" : "Password is to weak!";
-        break;
-      default:
-        break;
+      username: '',
+      first_name: '',
+      last_name: '',
+      password: ''
     }
-
-    this.setState({ errors, [name]: value });
   };
+handle_change = e => {
+  event.preventDefault();
+const { name, value } = event.target;
+let errors = this.state.errors;
+
+switch (name) {
+case 'first_name': 
+  errors.first_name = 
+    value.length < 5
+      ? 'Name must be 5 characters long at least!'
+      : '';
+  break;
+case 'last_name': 
+  errors.last_name = 
+      value.length < 5
+      ? 'Surname must be 5 characters long at least'
+      : '';
+  break;
+case 'username':
+  errors.username = validPhoneRegex.test(value)
+      ? ''
+      : 'Incorrect phone number!';
+      break;
+case 'password':
+  errors.password = strongPassword.test(value)
+      ? ''
+      : 'Password is to weak!';
+      break;
+default:
+  break;
+}
+
+this.setState({errors, [name]: value});
+};
 
   render() {
-    const { errors } = this.state;
+    const {errors} = this.state;
     return (
       <form onSubmit={(e) => this.props.handle_signup(e, this.state)}>
         <label htmlFor="username">Phone</label>
@@ -104,5 +115,5 @@ class SignupForm extends React.Component {
 export default SignupForm;
 
 SignupForm.propTypes = {
-  handle_signup: PropTypes.func.isRequired,
+  handle_signup: PropTypes.func.isRequired
 };

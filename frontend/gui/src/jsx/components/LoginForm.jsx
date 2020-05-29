@@ -1,39 +1,43 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const validPhoneRegex = RegExp(/^[0-9\b]{10}$/);
 const strongPassword = RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 class LoginForm extends React.Component {
   state = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
     errors: {
-      username: "",
-      password: "",
-    },
+      username: '',
+      password: ''
+    }
   };
 
-  handle_change = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    let errors = this.state.errors;
-
-    switch (name) {
-      case "username":
-        errors.username = validPhoneRegex.test(value) ? "" : "Incorrect phone number!";
+  handle_change = e => {
+    event.preventDefault();
+  const { name, value } = event.target;
+  let errors = this.state.errors;
+  
+  switch (name) {
+  case 'username':
+    errors.username = validPhoneRegex.test(value)
+        ? ''
+        : 'Incorrect phone number!';
         break;
-      case "password":
-        errors.password = strongPassword.test(value) ? "" : "Password is too small";
+  case 'password':
+    errors.password = strongPassword.test(value)
+        ? ''
+        : 'Password is too small';
         break;
-      default:
-        break;
-    }
-
-    this.setState({ errors, [name]: value });
+  default:
+    break;
+  }
+  
+  this.setState({errors, [name]: value});
   };
 
   render() {
-    const { errors } = this.state;
+    const {errors} = this.state;
     return (
       <form onSubmit={(e) => this.props.handle_login(e, this.state)}>
         <div className="inpSec">
@@ -52,7 +56,6 @@ class LoginForm extends React.Component {
             />
           {errors.username.length > 0 && <span className="error">{errors.username}</span>}
           </div>
-<<<<<<< HEAD
         </div>
 
         <div className="inpSec">
@@ -69,24 +72,6 @@ class LoginForm extends React.Component {
           {errors.password.length > 0 && <span className="error">{errors.password}</span>}
           </div>
         </div>
-=======
-        </div>
-
-        <div className="inpSec">
-          <div className="labelInp">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              required="required"
-              name="password"
-              value={this.state.password}
-              onChange={this.handle_change}
-              noValidate
-            />
-          {errors.password.length > 0 && <span className="error">{errors.password}</span>}
-          </div>
-        </div>
->>>>>>> a31b4c18f8d76ac2acfdeca3f6a37442854c470d
         <input type="submit" className="submit" value="Sign In" />
       </form>
     );
@@ -96,5 +81,5 @@ class LoginForm extends React.Component {
 export default LoginForm;
 
 LoginForm.propTypes = {
-  handle_login: PropTypes.func.isRequired,
+  handle_login: PropTypes.func.isRequired
 };

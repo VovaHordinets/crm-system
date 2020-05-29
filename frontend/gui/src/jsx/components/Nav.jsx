@@ -1,6 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "../../scss/Auth.css";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function Nav(props) {
   const logged_out_nav = (
@@ -21,17 +20,11 @@ function Nav(props) {
       </li>
     </ul>
   );
-  return <div className="header_user_name" >{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
+  return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
 }
 
 export default Nav;
 
 Nav.propTypes = {
   logged_in: PropTypes.bool.isRequired,
-<<<<<<< HEAD
-  display_page: PropTypes.func.isRequired,
-  handle_logout: PropTypes.func.isRequired,
 };
-=======
-};
->>>>>>> a31b4c18f8d76ac2acfdeca3f6a37442854c470d

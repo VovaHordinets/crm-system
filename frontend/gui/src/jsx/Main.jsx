@@ -1,47 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from "react";
-import { useHistory } from "react-router-dom";
-import Nav from "./components/Nav";
-import OrderInput from "./orders/ordersInput";
-import OrderList from "./orders/ordersList";
-import "../scss/Main.css";
-import "../scss/orders.css";
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayed_page: "",
-      logged_in: true,
-      username: "",
-      first_name: "",
-      current_page: "/home",
-    };
-  }
-  componentDidMount() {
-    if (this.state.logged_in) {
-      fetch("http://localhost:8000/userauth/current_user/", {
-        headers: {
-          Authorization: `JWT ${localStorage.getItem("token")}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          this.setState({ username: json.username, first_name: json.first_name });
-        });
-    }
-  }
-  handle_logout = () => {
-    localStorage.removeItem("token");
-    this.setState({ logged_in: false, username: "", first_name: "", current_page: "/auth" });
-    window.location = this.state.current_page;
-  };
-
-  // const history = useHistory();
-  // history.push("/home");
-  render() {
-    return (
-      <div className="main_wrapper">
-=======
 import React, { Component } from 'react';
 import {useHistory } from 'react-router-dom';
 import Nav from './components/Nav';
@@ -85,7 +41,6 @@ class Main extends Component{
     render(){
     return(
 <div className="main_wrapper">
->>>>>>> a31b4c18f8d76ac2acfdeca3f6a37442854c470d
         <div className="header">
           <div className="header_user_name">
             <h1 className="userName">Logged as {`${this.state.first_name}`}</h1>
@@ -124,6 +79,6 @@ class Main extends Component{
         </div>
       </div>
     );
-  }
+}
 }
 export default Main;
