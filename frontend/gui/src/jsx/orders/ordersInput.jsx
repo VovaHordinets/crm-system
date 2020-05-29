@@ -11,6 +11,7 @@ const validateForm = (errors) => {
 const validPhoneRegex = RegExp(/^[0-9\b]{10}$/);
 
 class OrderForm extends React.Component {
+<<<<<<< HEAD
   state = {
     name: "",
     description: "",
@@ -22,6 +23,55 @@ class OrderForm extends React.Component {
       phone: "",
     },
   };
+=======
+    state = {
+        name: '',
+        description: '',
+        customer: '',
+        phone: '',
+        errors: {
+            name: '',
+            customer: '',
+            phone: ''
+          }
+      };
+      
+    handle_createOrder = (event, requestType,id) => {
+        event.preventDefault();
+        if(validateForm(this.state.errors)) {
+        const name = event.target.elements.name.value;
+        const description = event.target.elements.description.value;
+        const customer = event.target.elements.customer.value;
+        const phone = event.target.elements.phone.value;
+        console.log(name,description,customer,phone);
+        axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('token')}`;
+        console.log(localStorage.getItem('token'));
+        switch  (requestType){
+            case 'post':
+                return axios.post('http://localhost:8000/orders/',{
+                    name: name,
+                    description: description,
+                    customer: customer,
+                    phone: phone
+                },window.location.reload()
+                )
+                .then(res => console.log(res))
+                .catch(err =>console.log(err));
+            case 'put':
+                return axios.put(`http://localhost:8000/orders/${id}/`,{
+                    name: name,
+                    description: description,
+                    customer: customer,
+                    phone: phone
+                })
+                .then(res => console.log(res))
+                .catch(err =>console.log(err));
+        }
+    }
+    else{
+        console.error('Invalid Form')
+      }
+>>>>>>> a31b4c18f8d76ac2acfdeca3f6a37442854c470d
 
   handle_createOrder = (event, requestType, id) => {
     // event.preventDefault();
@@ -78,12 +128,21 @@ class OrderForm extends React.Component {
         break;
     }
 
+<<<<<<< HEAD
     this.setState({ errors, [name]: value });
   };
   render() {
     const { errors } = this.state;
     return (
       <form className="order-form" onSubmit={(event) => this.handle_createOrder(event, "post", 1)}>
+=======
+    this.setState({errors, [name]: value});
+      };
+    render() {
+        const {errors} = this.state;
+        return (
+<form className="order-form" onSubmit={(event) => this.handle_createOrder(event, "post", null)}>
+>>>>>>> a31b4c18f8d76ac2acfdeca3f6a37442854c470d
         <div className="actionName">
           <div className="spacer"> </div>
           <h1 className="title">Add New Order</h1>
@@ -132,6 +191,7 @@ class OrderForm extends React.Component {
         {errors.phone.length > 0 && <span className="error">{errors.phone}</span>}
         <input type="submit" className="submit" value="Add Order" />
       </form>
+<<<<<<< HEAD
     );
   }
 }
@@ -141,3 +201,10 @@ export default OrderForm;
 OrderForm.propTypes = {
   handle_createOrder: PropTypes.func.isRequired,
 };
+=======
+        );
+      }
+    }
+    
+    export default OrderForm;
+>>>>>>> a31b4c18f8d76ac2acfdeca3f6a37442854c470d

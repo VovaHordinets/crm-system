@@ -28,6 +28,10 @@ export default Nav;
 
 Nav.propTypes = {
   logged_in: PropTypes.bool.isRequired,
+<<<<<<< HEAD
   display_page: PropTypes.func.isRequired,
   handle_logout: PropTypes.func.isRequired,
 };
+=======
+};
+>>>>>>> a31b4c18f8d76ac2acfdeca3f6a37442854c470d

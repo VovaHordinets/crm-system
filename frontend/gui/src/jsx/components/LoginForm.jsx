@@ -52,6 +52,7 @@ class LoginForm extends React.Component {
             />
           {errors.username.length > 0 && <span className="error">{errors.username}</span>}
           </div>
+<<<<<<< HEAD
         </div>
 
         <div className="inpSec">
@@ -68,6 +69,24 @@ class LoginForm extends React.Component {
           {errors.password.length > 0 && <span className="error">{errors.password}</span>}
           </div>
         </div>
+=======
+        </div>
+
+        <div className="inpSec">
+          <div className="labelInp">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              required="required"
+              name="password"
+              value={this.state.password}
+              onChange={this.handle_change}
+              noValidate
+            />
+          {errors.password.length > 0 && <span className="error">{errors.password}</span>}
+          </div>
+        </div>
+>>>>>>> a31b4c18f8d76ac2acfdeca3f6a37442854c470d
         <input type="submit" className="submit" value="Sign In" />
       </form>
     );
